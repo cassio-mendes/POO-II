@@ -1,0 +1,61 @@
+package aulaEnumerate;
+
+public class Exercicio2 {
+    
+    public static enum Operacao { //Enumeração de operações aritméticas básicas
+        SOMA {
+            @Override
+            public double executar(double n1, double n2) { return n1 + n2; }
+        }, 
+        
+        SUBTRACAO {
+            @Override
+            public double executar(double n1, double n2) { return n1 - n2; }
+        },
+        
+        MULTIPLICACAO {
+            @Override
+            public double executar(double n1, double n2) { return n1 * n2; }
+        },
+        
+        DIVISAO {
+            @Override
+            public double executar(double n1, double n2) {
+                if(n2 != 0)
+                    return n1/n2;
+                else 
+                    return Double.MAX_VALUE; //ERRO aritmético
+            }
+        };
+
+        public abstract double executar(double n1, double n2); //Método abstrato
+    }
+
+    public static void main(String[] args) {
+
+        //Parâmetros:
+        double n1 = 10.5, n2 = 5.0, n3 = 2.0, n4 = 4.5;
+        System.out.printf("Números: %.1f; %.1f; %.1f e %.1f\n", n1, n2, n3, n4);
+
+        //Chamando operações:
+        System.out.println("Soma: " + calcular(Operacao.SOMA, n1, n2, n3, n4));
+
+        System.out.println("Subtração:" + calcular(Operacao.SUBTRACAO, n1, n2, n3, n4));
+
+        System.out.println("Multiplicação: " + calcular(Operacao.MULTIPLICACAO, n1, n2, n3, n4));
+
+        System.out.println("Divisão: " + calcular(Operacao.DIVISAO, n1, n2, n3, n4));
+    }
+
+    private static double calcular(Operacao op, double... numeros) { 
+        double resultado = op.executar(numeros[0], numeros[1]); //Executa a operação com os dois primeiros números
+
+        //Se houver mais números, executa a operação com eles também
+        for (int i = 2; i < numeros.length; i++) {
+            resultado = op.executar(resultado, numeros[i]);
+        }
+
+        return resultado; //Retorna o resultado final
+    }
+
+}
