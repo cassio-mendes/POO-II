@@ -1,2 +1,8 @@
 bin/
 *.class
+
+*.iml
+
+out/
+
+.idea/
