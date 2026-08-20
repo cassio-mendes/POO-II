@@ -6,6 +6,7 @@ public class Conta {
     private double saldo;
     private boolean clienteEspecial;
     private double limite = 0.0;
+    private double chequeEspecial = 0.0;
 
     public Conta() {}
 
@@ -19,12 +20,17 @@ public class Conta {
     public void debita(double v) throws SIException {
         if(this.saldo < v) { //Saldo insuficiente
 
-            if(!this.clienteEspecial || v > this.limite) //Não pode debitar
+            if(!this.clienteEspecial || (v - this.saldo) > this.limite) //Não pode debitar
                 throw new SIException(this.nConta + "");
 
             else { //Clientes especiais podem ter saldo negativo dentro do limite
                 this.saldo -= v;
                 this.limite -= v;
+
+                //Corrige o limite para 0, para mostrar que não pode mais contrair dívidas
+                if(this.limite < 0.0) this.limite = 0.0;
+
+                this.chequeEspecial += (this.saldo * -1);
             }
         } else {
             this.saldo -= v;
@@ -35,7 +41,9 @@ public class Conta {
 
     public int getnConta() { return this.nConta; }
 
-    public double getSaldo() { return this.saldo; }
+    public double getChequeEspecial() { return this.chequeEspecial; }
+
+    public double getLimite() { return this.limite; }
 
     public boolean isClienteEspecial() { return this.clienteEspecial; }
 }
