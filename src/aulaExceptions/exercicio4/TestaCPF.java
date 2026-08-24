@@ -3,11 +3,11 @@ package aulaExceptions.exercicio4;
 public class TestaCPF {
 
     static void main() {
-        validarCPF("147.904.355-40"); //CPF válido
-        validarCPF("111.111.111-11"); //CPF inválido
+        validarCPF("147.904.366-40"); //CPF válido
+        validarCPF("147.904.366-22"); //CPF inválido
     }
 
-    static void validarCPF(String cpf) {
+    static void validarCPF(String cpf) throws IllegalArgumentException {
         try {
             int[] digitos = new int[11];
             int j = 0;
@@ -28,7 +28,27 @@ public class TestaCPF {
                 soma += digitos[i] * multiplicador;
                 multiplicador--;
             }
+            int primeiroDigito = (soma * 10) % 11;
+            if(primeiroDigito == 10) primeiroDigito = 0; //Corrige o resto 10 para 0
 
+            if(primeiroDigito != digitos[9]) //Se o primeiro dígito verificador estiver incorreto
+                throw new IllegalArgumentException(cpf + " é um CPF inválido");
+            else {
+                //Calcula o segundo dígito verificador
+                soma = 0; multiplicador = 11;
+
+                for (int i = 0; i < 10; i++) { //9 primeiros + 1° identificador
+                    soma += digitos[i] * multiplicador;
+                    multiplicador--;
+                }
+                int segundoDigito = (soma * 10) % 11;
+                if(segundoDigito == 10) segundoDigito = 0; //Corrige o resto 10 para 0
+
+                if(segundoDigito == digitos[10])
+                    System.out.println(cpf + " é um CPF válido");
+                else
+                    throw new IllegalArgumentException(cpf + " é um CPF inválido");
+            }
         } catch(IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
