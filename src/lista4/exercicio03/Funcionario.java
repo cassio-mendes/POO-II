@@ -24,14 +24,8 @@ public class Funcionario implements Cloneable {
 
     @Override
     public Cloneable clone() {
-        try {
-            Funcionario f = (Funcionario)super.clone();
-            f.dataAdmissao = (Date) this.dataAdmissao.clone();
-            return f;
-
-        } catch(CloneNotSupportedException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
+        Funcionario f = new Funcionario(this.nome, this.salario);
+        f.dataAdmissao = (Date) this.dataAdmissao.clone();
+        return f;
     }
 }
