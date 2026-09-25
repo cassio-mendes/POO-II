@@ -12,8 +12,8 @@ public class ExerciciosLambda {
 // Crie uma lambda que receba dois números e retorne asoma.
 // Crie uma interface funcional se achar necessário.
 
-        Soma resultado = (int n1, int n2) -> n1 + n2;
-        System.out.println("Ex01 -> Resultado: " + resultado);
+        Soma resultado = (int n1, int n2) -> System.out.println("Ex01 -> Resultado: " + (n1 + n2));
+        resultado.soma(5, 6);
 
 // EXERCÍCIO 2 -
 //
@@ -22,8 +22,11 @@ public class ExerciciosLambda {
 // Crie uma interface funcional se achar necessário.
 //
 
-        Maior maior = (n1, n2) -> (n1 > n2 || n1 == n2) ? n1 : n2;
-        System.out.println("Ex02 -> Maior: " + maior);
+        Maior maior = (n1, n2) -> {
+            int n = (n1 > n2 || n1 == n2) ? n1 : n2;
+            System.out.println("Ex02 -> Maior: " + n);
+        };
+        maior.maior(1, 2);
 
 // EXERCÍCIO 3 -
 
@@ -32,7 +35,7 @@ public class ExerciciosLambda {
 // Consulte o mtodo sort() de List, antes de resolver
         List<Integer> numeros = Arrays.asList(5, 2, 8, 1, 10, 3);
 
-        numeros.sort((n1, n2) -> (n1 < n2 || n1 == n2) ? n1 : n2);
+        numeros.sort((n1, n2) -> (n1 < n2 || n1 == n2) ? -1 : 1);
 
         System.out.println("Ex03 -> Números: " + numeros);
 //
@@ -50,8 +53,9 @@ public class ExerciciosLambda {
 // para o maior.
 // produtos.sort((a, b) -> __________________);
 
-        produtos.sort((a, b) -> (a.getPreco() <= b.getPreco()) ? a.getPreco() : b.getPreco());
+        produtos.sort((a, b) -> (a.getPreco() <= b.getPreco()) ? -1 : 1);
 
+        System.out.println("Ex04 -> Produtos:");
         for (Produto produto : produtos) {
             System.out.println(
                     produto.getNome() + " - " + produto.getPreco()
@@ -73,5 +77,7 @@ class Produto {
     public int getPreco() {
         return preco;
     }
+
+
 }
 
