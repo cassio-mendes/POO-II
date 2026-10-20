@@ -5,9 +5,9 @@ public class Testa {
     static void main() {
         ReportManager manager = new ConcreteManager();
 
-        Report r1 = manager.generateReport(0);
-        Report r2 = manager.generateReport(1);
-        Report r3 = manager.generateReport(2);
+        Report r1 = manager.generateReport(ConcreteManager.PDF);
+        Report r2 = manager.generateReport(ConcreteManager.HTML);
+        Report r3 = manager.generateReport(ConcreteManager.EXCEL);
 
         System.out.println("\n=== Exemplo de criação de objetos com Factory Method ===");
         System.out.println("\nObjetos no manager:");
