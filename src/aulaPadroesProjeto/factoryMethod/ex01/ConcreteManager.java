@@ -1,4 +1,4 @@
-package aulaPadroesProjeto.factoryMethod.exercicio1;
+package aulaPadroesProjeto.factoryMethod.ex01;
 
 public class ConcreteManager extends ReportManager{
 
