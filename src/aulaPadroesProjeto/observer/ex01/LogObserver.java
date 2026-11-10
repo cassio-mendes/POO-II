@@ -1,17 +1,10 @@
 package aulaPadroesProjeto.observer.ex01;
 
-public class LogObserver implements Observer, Runnable {
-
-    private int value;
+public class LogObserver implements Observer {
 
     @Override
     public void update(int value) {
-        this.value = value;
-        this.run();
+        new Thread(() -> System.out.println("PROGRESSO: " + value + "%")).start();
     }
 
-    @Override
-    public void run() {
-        System.out.println("PROGRESSO: " + this.value + "%");
-    }
 }

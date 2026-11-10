@@ -1,5 +1,7 @@
 package aulaPadroesProjeto.observer.ex01;
 
+import javax.swing.*;
+
 public class Main {
 
     static void main() {
@@ -7,7 +9,9 @@ public class Main {
         LogObserver logs = new LogObserver();
         sujeito.addObserver(logs);
 
-        BarraProgresso tela = new BarraProgresso("Simulador de Barra de Progresso", sujeito);
+        SwingUtilities.invokeLater(() -> {
+            BarraProgresso tela = new BarraProgresso("Simulador de Barra de Progresso", sujeito);
+        });
     }
 
 }
