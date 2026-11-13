@@ -6,3 +6,5 @@ bin/
 out/
 
 .idea/
+
+src/aulaStreams/ex01/formulario.bin
